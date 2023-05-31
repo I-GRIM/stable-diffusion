@@ -315,24 +315,24 @@ def main():
                                 x_sample = 255. * rearrange(x_sample.cpu().numpy(), 'c h w -> h w c')
                                 img = Image.fromarray(x_sample.astype(np.uint8))
                                 img = put_watermark(img, wm_encoder)
-                                img.save(os.path.join(sample_path, f"{base_count:05}.png"))
+                                img.save(os.path.join(outpath, "result.png"))
                                 base_count += 1
 
                         if not opt.skip_grid:
                             all_samples.append(x_checked_image_torch)
 
-                if not opt.skip_grid:
-                    # additionally, save as grid
-                    grid = torch.stack(all_samples, 0)
-                    grid = rearrange(grid, 'n b c h w -> (n b) c h w')
-                    grid = make_grid(grid, nrow=n_rows)
+                # if not opt.skip_grid:
+                #     # additionally, save as grid
+                #     grid = torch.stack(all_samples, 0)
+                #     grid = rearrange(grid, 'n b c h w -> (n b) c h w')
+                #     grid = make_grid(grid, nrow=n_rows)
 
-                    # to image
-                    grid = 255. * rearrange(grid, 'c h w -> h w c').cpu().numpy()
-                    img = Image.fromarray(grid.astype(np.uint8))
-                    img = put_watermark(img, wm_encoder)
-                    img.save(os.path.join(outpath, f'grid-{grid_count:04}.png'))
-                    grid_count += 1
+                #     # to image
+                #     grid = 255. * rearrange(grid, 'c h w -> h w c').cpu().numpy()
+                #     img = Image.fromarray(grid.astype(np.uint8))
+                #     img = put_watermark(img, wm_encoder)
+                #     img.save(os.path.join(outpath, f'grid-{grid_count:04}.png'))
+                #     grid_count += 1
 
                 toc = time.time()
 
