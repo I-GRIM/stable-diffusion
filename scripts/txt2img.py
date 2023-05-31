@@ -268,10 +268,10 @@ def main():
             data = f.read().splitlines()
             data = list(chunk(data, batch_size))
 
-    sample_path = os.path.join(outpath, "samples")
-    os.makedirs(sample_path, exist_ok=True)
-    base_count = len(os.listdir(sample_path))
-    grid_count = len(os.listdir(outpath)) - 1
+    # sample_path = os.path.join(outpath, "samples")
+    # os.makedirs(sample_path, exist_ok=True)
+    # base_count = len(os.listdir(sample_path))
+    # grid_count = len(os.listdir(outpath)) - 1
 
     start_code = None
     if opt.fixed_code:
@@ -316,7 +316,7 @@ def main():
                                 img = Image.fromarray(x_sample.astype(np.uint8))
                                 img = put_watermark(img, wm_encoder)
                                 img.save(os.path.join(outpath, "result.png"))
-                                base_count += 1
+                                #base_count += 1
 
                         if not opt.skip_grid:
                             all_samples.append(x_checked_image_torch)
